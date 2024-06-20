@@ -8,6 +8,8 @@ export async function GET(request: Request) {
       * await prisma.todo.deleteMany({where:{complete: true}}) // Elimina todos los completos
   */
   await prisma.todo.deleteMany({}); // delete * from todo
+
+  await prisma.users.deleteMany({}); // delete * from user
   await prisma.todo.createMany({
     data: [
       { description: "Realizar conexion a la base de datos", done: true },
