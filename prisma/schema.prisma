@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,11 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Model Database Table
 model Todo {
   id          String   @id @default(uuid())
   description String
   done        Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+
+// Si realizamos alguna modificacion en el modelo despues de de haber hecho un pull
+// debemos hacer un npx prisma generate para que se actualice el modelo en el cliente
+// luego un npx prisma migrate dev para que se actualice en la base de datos, esto nos creara una nueva migracion
+// OJO! ELIMINA LA MIGRACION QUE SE CREO ANTES DE HACER EL PULL, YA QUE NO SE PUEDE HACER UNA MIGRACION DE UNA MIGRACION.
+model Users {
+  id        String   @id @default(uuid()) @db.VarChar
+  name      String   @db.VarChar
+  isAdmin   Boolean? @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  roles     String[] @default([])
 }
