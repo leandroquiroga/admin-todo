@@ -7,4 +7,5 @@ export interface Todos {
 
 export interface ItemProps {
   item?: TodoPrisma
+  toggleTodo: (id: string, done: boolean) => Promise<TodoPrisma>
 }

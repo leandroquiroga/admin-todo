@@ -4,11 +4,13 @@ import { ItemProps } from "../interfaces";
 import styles from "./TodoItem.module.css";
 import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";
 
-export const TodoItem = ({ item }: ItemProps) => {
+export const TodoItem = ({ item, toggleTodo }: ItemProps) => {
+
   return (
     <div className={item?.done ? styles.todoDone : styles.todoPending}>
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div
+          onClick={() => toggleTodo(item!.id, !item?.done)}
           className={`
           flex p-2 rounded-ms cursor-pointer
           horver:bg-opacity-60
