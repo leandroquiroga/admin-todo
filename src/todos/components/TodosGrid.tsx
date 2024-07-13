@@ -4,7 +4,6 @@ import React from "react";
 import { Todos } from "../interfaces";
 import { TodoItem } from "./TodoItem";
 import * as apiTodo from "@/todos/helpers/todos";
-import { Todo } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 export const TodosGrid = ({ todos = [] }: Todos) => {
