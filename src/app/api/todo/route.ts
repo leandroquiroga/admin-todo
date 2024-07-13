@@ -69,3 +69,16 @@ export async function POST(request: Request) {
     }, { status: 400 });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    // Eliminanos los todos que esten complentados de las bases de datos
+    const response = await prisma.todo.deleteMany({ where: { done: true } });
+
+    if (response.count === 0) return NextResponse.json({ message: "No completed tasks to delete" });
+
+    return NextResponse.json({ message: "Has been deleted all completed tasks" });
+  } catch (error) {
+    console.log(error);
+  }
+}
