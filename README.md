@@ -24,10 +24,20 @@ Paso a paso para levantar la app en desarrollo
       npm run dev
    ```
 
-5. SEED
+5. Ejecutar comandos de prisma
+
+   ```
+      npx prisma migrate dev
+      npx prisma generate
+   ```
+
+   prisma migrate dev: Se encarga de realizar la sincronizacion con el cliente
+   prisma generate: Se encarga de crear nuestro cliente
+
+6. SEED
    Se debe ejecutar el seed /api/seed para crear la bases de datos local
 
-6. Inicializacion de Prisma
+7. Inicializacion de Prisma
    Serie de comando para utilizar Prisma con Next.js
    ```
    npx prisma init
