@@ -1,4 +1,4 @@
-import { Todo as TodoPrisma } from '@prisma/client';
+import { Todo, Todo as TodoPrisma } from '@prisma/client';
 
 // Components
 export interface Todos {
@@ -9,3 +9,14 @@ export interface ItemProps {
   item?: TodoPrisma
   toggleTodo: (id: string, done: boolean) => Promise<TodoPrisma>
 }
+
+export interface ErrorCreateTodo {
+  path: string;
+  errorOriginalValue: string;
+  message: string;
+  status: string;
+  statusCode: number;
+}
+
+
+export type ResponseCreateTodo = Todo | ErrorCreateTodo;
