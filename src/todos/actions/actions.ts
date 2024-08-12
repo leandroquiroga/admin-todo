@@ -11,8 +11,19 @@ import { revalidatePath } from "next/cache";
 import { ResponseCreateTodo } from "../interfaces";
 
 
+export const sleep = async (second: number = 0) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(true);
+    }, second * 1000);
+  })
+};
+
 
 export const toggleTodo = async (id: string, done: boolean): Promise<Todo> => {
+
+  // await sleep(3); // Simulamos una petición lenta
+
   const todo = await prisma.todo.findUnique({ where: { id } });
 
   if (!todo) throw new Error(`Todo with id ${id} not found`);
