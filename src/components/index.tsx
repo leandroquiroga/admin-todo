@@ -1,3 +1,4 @@
+export { ProductCard } from "../products/components/ProductsCard";
 export { SideBar } from "./SideBar";
 export { SideBarItem } from "./SideBarItem";
 export { TabBar } from "./Tabar";
