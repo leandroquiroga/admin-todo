@@ -1,4 +1,4 @@
-type AviableSizes = {
+export type AviableSizes = {
   count: number
   size: string
 }

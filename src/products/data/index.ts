@@ -7,16 +7,27 @@ export const products: ProductCardProps[] = [
     name: 'Jeans Clasico Verde Gastado',
     price: 19000,
     description: 'Jeans Clasico de color verde gastado, estilo clasico y comodo',
-    avaibleSizes: [{
-      size: '44',
-      count: 5,
-    }, {
-      size: '46',
-      count: 3,
-    }, {
-      size: '48',
-      count: 2,
-    }],
+    avaibleSizes: [
+      {
+        size: '42',
+        count: 0,
+      },
+      {
+        size: '44',
+        count: 5,
+      }, {
+        size: '46',
+        count: 4,
+      }, {
+        size: '48',
+        count: 2,
+      },
+      {
+        size: '50',
+        count: 0,
+      }
+
+    ],
     image: '/images/products/creaslim-F7eJxHoR1lg-unsplash.jpg',
   },
   {
