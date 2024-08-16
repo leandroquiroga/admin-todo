@@ -3,8 +3,12 @@
 import React, { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { AviableSizes, Product } from "../interfaces";
-import { addProductToCart } from "@/shopping-cart/actions/actions";
+import {
+  addProductToCart,
+  removeProductFromCart,
+} from "@/shopping-cart/actions/actions";
 import { useRouter } from "next/navigation";
+import { ShoppingCart } from "@/shopping-cart/components/ShoppingCart";
 
 let countClick = 0;
 export const Products = ({ product }: Product) => {
@@ -31,6 +35,8 @@ export const Products = ({ product }: Product) => {
       setDisableButton(true);
       return;
     }
+
+    // Averiguamos si la cantidad del producto es igual a 0
     if (count === 0) {
       const element = e.target as HTMLInputElement;
       const textContentDispo =
@@ -52,14 +58,16 @@ export const Products = ({ product }: Product) => {
       setErrorMessage("Seleccione un talle por favor!");
       return;
     }
-    // setDisableButton(false);
     setErrorMessage("");
     addProductToCart(id);
     router.refresh();
   };
 
-  const isSizeAvailable = (): boolean =>
-    sizeAvailable === "No disponible" ? true : false;
+  // Usarlo en el carrito de compras
+  const onRemoveFromCart = (id: string) => {
+    removeProductFromCart(id);
+    router.refresh();
+  };
 
   return (
     <>
@@ -79,7 +87,7 @@ export const Products = ({ product }: Product) => {
               {name}
             </p>
             <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-              ${price}
+              ${price.toFixed(2)}
             </p>
           </div>
           <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
