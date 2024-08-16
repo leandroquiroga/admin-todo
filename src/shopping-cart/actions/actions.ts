@@ -31,3 +31,11 @@ export const addProductToCart = (id: string): void => {
   setCookie('cart', JSON.stringify(cookieCart));
 
 };
+
+
+// Eliminamos todos los productos del carrito
+export const removeProductFromCart = (id: string): void => {
+  const cookieCart = getCookiesCart();
+  delete cookieCart[id];
+  setCookie('cart', JSON.stringify(cookieCart));
+}
