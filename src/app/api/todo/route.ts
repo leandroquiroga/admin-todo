@@ -59,7 +59,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: "Has been created a new task", data: todo });
   } catch (error: any) {
-    console.log(error);
     return NextResponse.json({
       path: `Error location: ${error.path}`,
       errorOriginalValue: `Error value: ${error.params.originalValue}`,
@@ -79,6 +78,5 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({ message: "Has been deleted all completed tasks" });
   } catch (error) {
-    console.log(error);
   }
 }
