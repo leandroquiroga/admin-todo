@@ -1,6 +1,6 @@
 "use client";
 
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import Image from "next/image";
 import { AviableSizes, Product } from "../interfaces";
 import {
@@ -8,7 +8,6 @@ import {
   removeProductFromCart,
 } from "@/shopping-cart/actions/actions";
 import { useRouter } from "next/navigation";
-import { ShoppingCart } from "@/shopping-cart/components/ShoppingCart";
 
 let countClick = 0;
 export const Products = ({ product }: Product) => {
