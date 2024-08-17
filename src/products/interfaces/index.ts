@@ -14,3 +14,8 @@ export interface ProductCardProps {
 export interface Product {
   product: ProductCardProps;
 }
+
+export interface ProductInCartProps {
+  product: ProductCardProps;
+  quantity: number;
+}
