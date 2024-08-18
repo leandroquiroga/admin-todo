@@ -1,22 +1,25 @@
-import { cookies } from "next/headers";
 import React from "react";
-import { CookiesCart } from "../shopping-cart/actions/actions";
+import { cookies } from "next/headers";
 import { CiChat1, CiMenuBurger, CiSearch } from "react-icons/ci";
+import { CookiesCart } from "../shopping-cart/actions/actions";
 import { ShoppingCart } from "@/shopping-cart/components/ShoppingCart";
 
 export const TopMenu = () => {
   // Obtenemos la cookie
   const cookieStore = cookies();
-  const cart = JSON.parse(cookieStore.get("cart")?.value ?? "{}");
+  const cart = JSON.parse(
+    cookieStore.get("cart")?.value ?? "{}"
+  ) as CookiesCart;
 
-  const getCartTotal = (cart: CookiesCart): number => {
-    let items = 0;
-    Object.values(cart).forEach((value) => (items += value as number));
-
-    return items;
+  // Recorre el carrito de compras y retorna la cantidad total de productos
+  const getCartTotal = (): number => {
+    return Object.values(cart)
+      .flatMap((product) => Object.values(product))
+      .map((product) => product)
+      .reduce((acc, item) => acc + item.quantity, 0);
   };
 
-  const totalItems = getCartTotal(cart);
+  const totalItems = getCartTotal();
 
   return (
     <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
