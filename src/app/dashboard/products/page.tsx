@@ -1,6 +1,5 @@
 import { ProductCard } from "@/components";
-import { products } from "@/products/data";
-import { ProductInCartProps } from "@/products/interfaces";
+import { ProductCookiesProps } from "@/products/interfaces";
 import { CookiesCart } from "@/shopping-cart/actions/actions";
 import { cookies } from "next/headers";
 
@@ -9,20 +8,12 @@ export const metadata = {
   description: "Product page",
 };
 
-const productInCart = (cart: CookiesCart): ProductInCartProps[] => {
-  const productInCart: ProductInCartProps[] = [];
-
+const productInCart = (cart: CookiesCart): ProductCookiesProps[] => {
   // Recorremos el carrito y buscamos los productos correspondiente al id del producto
-  for (const id of Object.keys(cart)) {
-    const product = products.find((product) => product.id === id);
 
-    //si el producto existe lo agregamos al arreglo del carrito
-    if (product) {
-      productInCart.push({ product, quantity: cart[id] });
-    }
-  }
-
-  return productInCart;
+  return Object.values(cart)
+    .flatMap((product) => Object.values(product))
+    .map((product) => product);
 };
 
 export default function ProductPage() {
