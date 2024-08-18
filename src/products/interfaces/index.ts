@@ -16,6 +16,22 @@ export interface Product {
 }
 
 export interface ProductInCartProps {
-  product: ProductCardProps;
-  quantity: number;
+  product: ProductCookiesProps[];
 }
+
+export type ProductFilterdCookies = {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  producDescription: ProductCookiesProps[]
+}
+
+export type ProductCookiesProps = {
+  id: string;
+  quantity: number;
+  sizeSelected: string;
+  name: string;
+  price: number;
+  image: string;
+};

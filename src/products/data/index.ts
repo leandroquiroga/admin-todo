@@ -33,7 +33,7 @@ export const products: ProductCardProps[] = [
   {
     id: 'UUID-ABC-2',
     name: 'Buzo Hodies Tricolor',
-    price: 25,
+    price: 25000,
     description: 'Buzo hodies tricolor, estilo clasico y comodo',
     avaibleSizes: [{
       size: 'L',
