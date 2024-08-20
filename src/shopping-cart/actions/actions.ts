@@ -1,6 +1,8 @@
+
 import { products } from "@/products/data";
 import { ProductCookiesProps } from "@/products/interfaces";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
+import { cookies } from 'next/headers';
 
 
 export interface CookiesCart {
@@ -38,9 +40,29 @@ export const addProductToCart = (id: string, sizeSelected: string): void => {
 };
 
 
-// Eliminamos todos los productos del carrito
-export const removeProductFromCart = (id: string): void => {
-  const cookieCart = getCookiesCart();
-  delete cookieCart[id];
-  setCookie('cart', JSON.stringify(cookieCart));
+export const removeProductFromCart = (id: string, sizeSelected: string): void => {
+  const cookieCart = getCookiesCart() as CookiesCart;
+
+  // Verificar si existe el id y encontrar el índice del producto con el talle específico
+  const existingProductIndex = cookieCart[id]?.findIndex((item: { sizeSelected: string }) => item.sizeSelected === sizeSelected);
+
+  if (existingProductIndex !== undefined && existingProductIndex !== -1) {
+    // Eliminar el producto específico usando splice, sin dejar null
+    cookieCart[id].splice(existingProductIndex, 1);
+
+    // Si no quedan productos de ese id, eliminamos la entrada completa
+    if (cookieCart[id].length === 0) {
+      delete cookieCart[id];
+    }
+
+    // Actualizar la cookie con el carrito modificado
+    setCookie('cart', JSON.stringify(cookieCart));
+  }
+};
+
+
+export const removeAllProduct = () => {
+
+  // Actualizar la cookie con el carrito modificado
+  setCookie('cart', JSON.stringify({}));
 }

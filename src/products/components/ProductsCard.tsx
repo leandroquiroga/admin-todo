@@ -6,21 +6,34 @@ import { UIContext } from "@/context";
 import { CartProduct } from "@/shopping-cart/components/CartProduct";
 
 import { ProductCookiesProps } from "../interfaces";
+import { removeAllProduct } from "@/shopping-cart/actions/actions";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   productInCartList: ProductCookiesProps[];
 }
 export const ProductCard = ({ productInCartList }: ProductCardProps) => {
   const { showCart } = useContext(UIContext);
+  const router = useRouter();
 
+  const removeAllProducts = () => {
+    removeAllProduct();
+    router.refresh();
+  };
   return (
     <div>
       {showCart ? (
-        <>
+        <div className="flex flex-col">
+          <button
+            className="cursor-pointer text-sm hover:text-gray-500"
+            onClick={removeAllProducts}
+          >
+            Limpiar carrito
+          </button>
           {productInCartList.map((product, index) => (
             <CartProduct key={index} {...product} />
           ))}
-        </>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[3rem] ">
           {products.map((product) => (

@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
-import { addProductToCart } from "../actions/actions";
+import { addProductToCart, removeProductFromCart } from "../actions/actions";
 import { ProductCookiesProps } from "@/products/interfaces";
 
 export const CartProduct = ({
@@ -16,18 +16,22 @@ export const CartProduct = ({
   sizeSelected,
 }: ProductCookiesProps) => {
   const router = useRouter();
-
-  function onAddToCart() {
+  const onAddToCart = () => {
     addProductToCart(id, sizeSelected);
     router.refresh();
-  }
+  };
 
   function onRemoveItem() {
     //TODO: removeSingleItemFromCart(product.id);
     router.refresh();
   }
 
-  //TODO: Modificar este componente para que se muestre la información del producto en el carrito, se debe eliminar el titulo y el checkout de la compra
+  const handleRemoveAll = () => {
+    //TODO: Realizar la misma funcion pero verificar el talle actual a eliminar
+    removeProductFromCart(id, sizeSelected);
+    router.refresh();
+  };
+
   return (
     <div className="flex flex-col p-2">
       <div className="mx-auto w-full sm:justify-center flex flex-col">
@@ -69,10 +73,9 @@ export const CartProduct = ({
               </div>
               <div className="flex items-center space-x-4">
                 <p className="text-sm">${price * quantity}</p>
-                <IoCloseOutline
-                  size={25}
-                  className="hover:text-red-500 cursor-pointer"
-                />
+                <button onClick={handleRemoveAll} className="cursor-pointer">
+                  <IoCloseOutline size={25} className="hover:text-red-500" />
+                </button>
               </div>
             </div>
           </div>
