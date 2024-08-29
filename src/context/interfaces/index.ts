@@ -15,4 +15,22 @@ export interface UIProviderProps {
 }
 
 // UI - Types 
-export type UIActionTypes = | { type: "[UI] SHOW_CART", payload: boolean } 
+export type UIActionTypes = | { type: "[UI] SHOW_CART", payload: boolean }
+
+
+export interface ContextCartProps {
+  quantityCart: number;
+  addQuantityCart: (payload: number) => void;
+  removeQuantityCart: (payload: number) => void;
+}
+
+export interface CartState {
+  quantityCart: number;
+}
+
+export interface CartProviderProps {
+  children: ReactNode;
+}
+export type CartActionTypes =
+  | { type: "[CART] ADD_PRODUCT"; payload: number }
+  | { type: "[CART] REMOVE_PRODUCT"; payload: number }

@@ -6,9 +6,9 @@
 */
 
 import prisma from "@/lib/prisma";
+import { ResponseCreateTodo } from "@/types";
 import { Todo } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { ResponseCreateTodo } from "../interfaces";
 
 
 export const sleep = async (second: number = 0) => {

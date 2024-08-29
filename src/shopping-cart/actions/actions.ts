@@ -2,13 +2,14 @@
 import { products } from "@/products/data";
 import { ProductCookiesProps } from "@/products/interfaces";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
-import { cookies } from 'next/headers';
+import { revalidatePath } from "next/cache";
 
 
 export interface CookiesCart {
   [key: string]: ProductCookiesProps[];
 }
 
+// Obtenemos el carrito de compras
 export const getCookiesCart = (): CookiesCart => {
 
   // Verificamos que la cookie 'cart' exista para retornar un objeto con el id del producto y la cantidad
@@ -16,6 +17,7 @@ export const getCookiesCart = (): CookiesCart => {
   return {};
 }
 
+// Agregamos un producto al carrito
 export const addProductToCart = (id: string, sizeSelected: string): void => {
   const cookieCart = getCookiesCart();
 
@@ -39,7 +41,7 @@ export const addProductToCart = (id: string, sizeSelected: string): void => {
   setCookie('cart', JSON.stringify(cookieCart));
 };
 
-
+// Eliminamos un producto del mismo talle del carrito
 export const removeProductFromCart = (id: string, sizeSelected: string): void => {
   const cookieCart = getCookiesCart() as CookiesCart;
 
@@ -57,12 +59,26 @@ export const removeProductFromCart = (id: string, sizeSelected: string): void =>
 
     // Actualizar la cookie con el carrito modificado
     setCookie('cart', JSON.stringify(cookieCart));
+
   }
 };
 
+// Eliminar todos los productos del carrito
+export const removeAllProduct = () => setCookie('cart', JSON.stringify({}));
 
-export const removeAllProduct = () => {
 
-  // Actualizar la cookie con el carrito modificado
-  setCookie('cart', JSON.stringify({}));
+// Eliminar un solo producto del carrito
+export const removeOneProduct = (id: string, sizeSelected: string) => {
+  const cookieCart = getCookiesCart();
+
+  if (!cookieCart[id]) {
+    cookieCart[id] = [];
+  };
+
+  const existingProductIndex = cookieCart[id].findIndex((item: { sizeSelected: string }) => item.sizeSelected === sizeSelected);
+  if (existingProductIndex !== -1)
+    cookieCart[id][existingProductIndex].quantity = cookieCart[id][existingProductIndex].quantity - 1;
+
+  // Seteamos el carrito
+  setCookie('cart', JSON.stringify(cookieCart));
 }
