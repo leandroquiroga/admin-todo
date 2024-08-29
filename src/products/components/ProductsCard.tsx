@@ -20,14 +20,15 @@ export const ProductCard = ({ productInCartList }: ProductCardProps) => {
     removeAllProduct();
     router.refresh();
   };
+
+  
   return (
     <div>
       {showCart ? (
         <div className="flex flex-col">
           <button
             className="cursor-pointer text-sm hover:text-gray-500"
-            onClick={removeAllProducts}
-          >
+            onClick={removeAllProducts}>
             Limpiar carrito
           </button>
           {productInCartList.map((product, index) => (

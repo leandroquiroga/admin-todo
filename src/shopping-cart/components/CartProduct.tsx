@@ -1,10 +1,14 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
-import { addProductToCart, removeProductFromCart } from "../actions/actions";
+import {
+  addProductToCart,
+  removeOneProduct,
+  removeProductFromCart,
+} from "../actions/actions";
 import { ProductCookiesProps } from "@/products/interfaces";
 
 export const CartProduct = ({
@@ -16,19 +20,28 @@ export const CartProduct = ({
   sizeSelected,
 }: ProductCookiesProps) => {
   const router = useRouter();
+
+  useEffect(() => {
+    // Verifica que el producto actual tenga una cantidad de 0 para eliminarlo del carrito
+    if (quantity === 0) {
+      removeProductFromCart(id, sizeSelected);
+      router.refresh();
+    }
+  }, [quantity]);
+
   const onAddToCart = () => {
     addProductToCart(id, sizeSelected);
+
     router.refresh();
   };
 
-  function onRemoveItem() {
-    //TODO: removeSingleItemFromCart(product.id);
-    router.refresh();
-  }
-
   const handleRemoveAll = () => {
-    //TODO: Realizar la misma funcion pero verificar el talle actual a eliminar
     removeProductFromCart(id, sizeSelected);
+    router.refresh();
+  };
+
+  const onRemoveItem = () => {
+    removeOneProduct(id, sizeSelected);
     router.refresh();
   };
 
@@ -54,14 +67,16 @@ export const CartProduct = ({
             </div>
             <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
               <div className="flex items-center border-gray-100">
-                <button className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">
+                <button
+                  className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                  onClick={onRemoveItem}>
                   {" "}
                   -{" "}
                 </button>
                 <input
                   className="h-8 w-8 border bg-white text-center text-xs outline-none"
                   type="number"
-                  defaultValue={quantity}
+                  value={quantity}
                   min={1}
                 />
                 <button

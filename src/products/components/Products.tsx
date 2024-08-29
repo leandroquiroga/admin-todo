@@ -63,10 +63,10 @@ export const Products = ({ product }: Product) => {
   };
 
   // Usarlo en el carrito de compras
-  const onRemoveFromCart = (id: string) => {
-    removeProductFromCart(id);
-    router.refresh();
-  };
+  // const onRemoveFromCart = (id: string) => {
+  //   removeProductFromCart(id);
+  //   router.refresh();
+  // };
 
   return (
     <>
