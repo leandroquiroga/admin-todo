@@ -5,13 +5,11 @@ import { Products } from "./Products";
 import { UIContext } from "@/context";
 import { CartProduct } from "@/shopping-cart/components/CartProduct";
 
-import { ProductCookiesProps } from "../interfaces";
+import { ProductCardProps } from "../../utils/features/products/interfaces";
 import { removeAllProduct } from "@/shopping-cart/actions/actions";
 import { useRouter } from "next/navigation";
+import { Cheackout } from "@/shopping-cart/components/Cheackout";
 
-interface ProductCardProps {
-  productInCartList: ProductCookiesProps[];
-}
 export const ProductCard = ({ productInCartList }: ProductCardProps) => {
   const { showCart } = useContext(UIContext);
   const router = useRouter();
@@ -21,7 +19,6 @@ export const ProductCard = ({ productInCartList }: ProductCardProps) => {
     router.refresh();
   };
 
-  
   return (
     <div>
       {showCart ? (
@@ -31,9 +28,10 @@ export const ProductCard = ({ productInCartList }: ProductCardProps) => {
             onClick={removeAllProducts}>
             Limpiar carrito
           </button>
-          {productInCartList.map((product, index) => (
+          {productInCartList!.map((product, index) => (
             <CartProduct key={index} {...product} />
           ))}
+          <Cheackout items={productInCartList!} labelButton={"Comprar"} />
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[3rem] ">

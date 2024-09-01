@@ -2,10 +2,8 @@
 import React, { useContext } from "react";
 import { UIContext } from "@/context";
 import { CiShoppingCart } from "react-icons/ci";
+import { ShoppingCartProps } from "@/utils/features/shopping-cart/interfaces";
 
-export interface ShoppingCartProps {
-  totalItems: number;
-}
 export const ShoppingCart = ({ totalItems }: ShoppingCartProps) => {
   const { toggleShowCart, showCart } = useContext(UIContext);
   return (

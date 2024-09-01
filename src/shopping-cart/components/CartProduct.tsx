@@ -9,7 +9,8 @@ import {
   removeOneProduct,
   removeProductFromCart,
 } from "../actions/actions";
-import { ProductCookiesProps } from "@/products/interfaces";
+import { ProductCookiesProps } from "@/utils/features/products/interfaces";
+import { formatPrice } from "@/utils/features/shopping-cart/functions";
 
 export const CartProduct = ({
   id,
@@ -77,6 +78,7 @@ export const CartProduct = ({
                   className="h-8 w-8 border bg-white text-center text-xs outline-none"
                   type="number"
                   value={quantity}
+                  defaultValue={quantity}
                   min={1}
                 />
                 <button
@@ -87,7 +89,7 @@ export const CartProduct = ({
                 </button>
               </div>
               <div className="flex items-center space-x-4">
-                <p className="text-sm">${price * quantity}</p>
+                <p className="text-sm">${formatPrice(price * quantity)}</p>
                 <button onClick={handleRemoveAll} className="cursor-pointer">
                   <IoCloseOutline size={25} className="hover:text-red-500" />
                 </button>
@@ -96,28 +98,6 @@ export const CartProduct = ({
           </div>
         </div>
       </div>
-      {/* Sub total */}
-      {/* <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 w-full">
-    //         <div className="mb-2 flex justify-between">
-    //           <p className="text-gray-700">Subtotal</p>
-    //           <p className="text-gray-700">$129.99</p>
-    //         </div>
-    //         <div className="flex justify-between">
-    //           <p className="text-gray-700">Shipping</p>
-    //           <p className="text-gray-700">$4.99</p>
-    //         </div>
-    //         <hr className="my-4" />
-    //         <div className="flex justify-between">
-    //           <p className="text-lg font-bold">Total</p>
-    //           <div className="">
-    //             <p className="mb-1 text-lg font-bold">$134.98</p>
-    //             <p className="text-sm text-gray-700">Incluye Impuestos</p>
-    //           </div>
-    //         </div>
-    //         <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
-    //           Check out
-    //         </button>
-    //       </div> */}
     </div>
   );
 };

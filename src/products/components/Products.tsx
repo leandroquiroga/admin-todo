@@ -2,12 +2,12 @@
 
 import React, { MouseEvent, useState } from "react";
 import Image from "next/image";
-import { AviableSizes, Product } from "../interfaces";
+import { AviableSizes, Product } from "../../utils/features/products/interfaces";
 import {
   addProductToCart,
-  removeProductFromCart,
 } from "@/shopping-cart/actions/actions";
 import { useRouter } from "next/navigation";
+import { formatPrice } from "@/utils/features/shopping-cart/functions";
 
 let countClick = 0;
 export const Products = ({ product }: Product) => {
@@ -86,7 +86,7 @@ export const Products = ({ product }: Product) => {
               {name}
             </p>
             <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-              ${price.toFixed(2)}
+              ${formatPrice(price)}
             </p>
           </div>
           <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">

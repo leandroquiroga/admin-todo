@@ -1,17 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import {} from "../actions/actions";
 import { CiCircleChevLeft } from "react-icons/ci";
+import { PropsCart } from "@/utils/features/shopping-cart/interfaces";
 
-import { ProductCardProps } from "@/products/interfaces";
-
-interface Props {
-  product?: ProductCardProps;
-  quantity?: number;
-}
-
-export const Cart = ({ product, quantity }: Props) => {
+export const Cart = ({ product, quantity }: PropsCart) => {
   const router = useRouter();
 
   function onAddToCart() {
