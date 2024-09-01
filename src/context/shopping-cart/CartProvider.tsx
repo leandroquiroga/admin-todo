@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useReducer } from "react";
-import { CartProviderProps, CartState } from "../interfaces/index";
 import { cartReducer } from "./CartProvider";
 import { CartContext } from "./CartContext";
+import {
+  CartProviderProps,
+  CartState,
+} from "../../utils/features/context/interfaces";
 
 const CART_INITIAL_STATE: CartState = {
   quantityCart: 0,

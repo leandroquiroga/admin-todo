@@ -35,3 +35,7 @@ export type ProductCookiesProps = {
   price: number;
   image: string;
 };
+
+export interface ProductCardProps {
+  productInCartList?: ProductCookiesProps[];
+}

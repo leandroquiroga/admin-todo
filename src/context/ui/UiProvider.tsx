@@ -1,6 +1,6 @@
 "use client";
 import { useReducer } from "react";
-import { UIProviderProps, UIState } from "../interfaces";
+import { UIProviderProps, UIState } from "../../utils/features/context/interfaces";
 import { UIContext } from "./UIContext";
 import { uiReducer } from "./UIReducer";
 

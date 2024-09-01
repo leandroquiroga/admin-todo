@@ -1,7 +1,7 @@
 "use client";
 import React, { startTransition } from "react";
 import { useOptimistic } from "react";
-import { ItemProps } from "../interfaces";
+import { ItemProps } from "../../utils/features/todos/interfaces";
 
 import styles from "./TodoItem.module.css";
 import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";

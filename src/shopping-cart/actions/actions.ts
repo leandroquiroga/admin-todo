@@ -1,6 +1,6 @@
 
 import { products } from "@/products/data";
-import { ProductCookiesProps } from "@/products/interfaces";
+import { ProductCookiesProps } from "@/utils/features/products/interfaces";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { revalidatePath } from "next/cache";
 

@@ -2,14 +2,10 @@
 
 import React, { FormEvent, useEffect, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-// import * as apiTodo from "@/todos/helpers/todos";
-import { Todo } from "@prisma/client";
 import { createTodo } from "../actions/actions";
 import { Modal } from "./Modal";
+import { NewTodoProps } from "@/utils/features/todos/interfaces";
 
-interface NewTodoProps {
-  todos: Todo[];
-}
 export const NewTodo = ({ todos }: NewTodoProps) => {
   const [description, setDescription] = useState("");
   const [disabledButton, setDisabledButton] = useState(false);

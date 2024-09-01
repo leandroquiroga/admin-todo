@@ -1,4 +1,4 @@
-import { UIState, UIActionTypes } from '../interfaces'
+import { UIState, UIActionTypes } from '../../utils/features/context/interfaces'
 
 export const uiReducer = (state: UIState, action: UIActionTypes) => {
 

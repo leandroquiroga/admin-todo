@@ -1,9 +1,6 @@
 import React from "react";
 import { deleteCompletedTodo } from "../actions/actions";
-
-interface PropsModal {
-  setShowModal: (value: boolean) => void;
-}
+import { PropsModal } from "@/utils/features/todos/interfaces";
 
 export const Modal = ({ setShowModal }: PropsModal) => {
   const handleDeleteTodo = () => {

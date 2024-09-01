@@ -1,4 +1,4 @@
-import { CartActionTypes, CartState } from "../interfaces";
+import { CartActionTypes, CartState } from "../../utils/features/context/interfaces";
 
 
 export const cartReducer = (state: CartState, action: CartActionTypes): CartState => {

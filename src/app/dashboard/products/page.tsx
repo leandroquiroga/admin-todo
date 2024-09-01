@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components";
-import { ProductCookiesProps } from "@/products/interfaces";
+import { ProductCookiesProps } from "@/utils/features/products/interfaces";
 import { CookiesCart } from "@/shopping-cart/actions/actions";
 import { cookies } from "next/headers";
 
@@ -24,5 +24,5 @@ export default function ProductPage() {
 
   const productInCartList = productInCart(cart);
 
-  return <ProductCard productInCartList={productInCartList} />;
+  return <ProductCard productInCartList={productInCartList} id={""} name={""} price={0} description={""} avaibleSizes={[]} image={""} />;
 }

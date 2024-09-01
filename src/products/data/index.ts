@@ -1,4 +1,4 @@
-import { ProductCardProps } from "../interfaces";
+import { ProductCardProps } from "../../utils/features/products/interfaces";
 
 
 export const products: ProductCardProps[] = [
