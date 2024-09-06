@@ -31,7 +31,9 @@ export const ProductCard = ({ productInCartList }: ProductCardProps) => {
           {productInCartList!.map((product, index) => (
             <CartProduct key={index} {...product} />
           ))}
-          <Cheackout items={productInCartList!} labelButton={"Comprar"} />
+          <div className="flex flex-col justify-center items-center p-3">
+            <Cheackout items={productInCartList!} labelButton={"Comprar"} />
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[3rem] ">
