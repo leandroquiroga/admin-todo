@@ -1,3 +1,7 @@
+export const dynamic = "force-dynamic";
+// Nos aseguramos de que la page sea dinamicamente generada
+export const revalidate = 0;
+
 import prisma from "@/lib/prisma";
 import { NewTodo, TodosGrid } from "@/todos";
 

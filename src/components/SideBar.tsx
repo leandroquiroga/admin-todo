@@ -4,6 +4,8 @@ import {
   IoCalendarOutline,
   IoCheckboxOutline,
   IoListOutline,
+  IoCloudyOutline,
+  IoCartOutline,
 } from "react-icons/io5";
 import { SideBarItem } from "./SideBarItem";
 import { CiLogout } from "react-icons/ci";
@@ -23,6 +25,16 @@ const menuItems = [
     title: "Server Actions",
     icon: <IoListOutline />,
     path: "/dashboard/server-action",
+  },
+  {
+    title: "Cookies",
+    icon: <IoCloudyOutline />,
+    path: "/dashboard/cookies",
+  },
+  {
+    title: "Produts",
+    icon: <IoCartOutline />,
+    path: "/dashboard/products",
   },
 ];
 

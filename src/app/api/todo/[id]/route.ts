@@ -64,7 +64,6 @@ export async function PUT(request: Request, { params }: Segments) {
 
     return NextResponse.json({ message: `Todo ${id} has been updated`, data: updateTodo });
   } catch (error: any) {
-    console.log(error);
     return NextResponse.json({
       path: `Error location: ${error.path}`,
       errorOriginalValue: `Error value: ${error.params.originalValue}`,

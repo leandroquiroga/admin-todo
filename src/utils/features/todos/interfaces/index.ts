@@ -10,13 +10,10 @@ export interface ItemProps {
   toggleTodo: (id: string, done: boolean) => Promise<TodoPrisma>
 }
 
-export interface ErrorCreateTodo {
-  path: string;
-  errorOriginalValue: string;
-  message: string;
-  status: string;
-  statusCode: number;
+export interface NewTodoProps {
+  todos: Todo[];
 }
 
-
-export type ResponseCreateTodo = Todo | ErrorCreateTodo;
+export interface PropsModal {
+  setShowModal: (value: boolean) => void;
+}

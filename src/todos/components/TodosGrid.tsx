@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Todos } from "../interfaces";
+import { Todos } from "../../utils/features/todos/interfaces";
 import { TodoItem } from "./TodoItem";
 import { toggleTodo } from "../actions/actions";
 // import * as apiTodo from "@/todos/helpers/todos";
