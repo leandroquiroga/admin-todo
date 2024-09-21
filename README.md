@@ -44,3 +44,10 @@ Paso a paso para levantar la app en desarrollo
    npx prisma migrate dev
    npx prisma generate
    ```
+
+## NOTA: Usuario por defecto con sus respectivos todos
+
+```
+   __usuario__: tester1@google.com
+   __passwor__d: 1234567
+```

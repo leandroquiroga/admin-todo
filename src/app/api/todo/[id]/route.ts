@@ -6,6 +6,7 @@
  * @returns an object with data and message                   
 */
 
+import { getUserSession } from "@/auth/components/actions/auth-actions";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import * as yup from 'yup';
@@ -18,6 +19,10 @@ interface Segments {
 
 export async function GET(request: Request, { params }: Segments) {
 
+  const user = await getUserSession();
+
+  if (!user) return null;
+
   const { id } = params;
 
   const todo = await prisma.todo.findFirst({
@@ -28,6 +33,7 @@ export async function GET(request: Request, { params }: Segments) {
 
   if (!todo) return NextResponse.json({ message: `Todo with ${id} Not Found` }, { status: 404 });
 
+  if (todo.userId !== user.id) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   return NextResponse.json({ message: "OK", data: todo });
 }
 
@@ -39,6 +45,11 @@ const putSchema = yup.object({
 export async function PUT(request: Request, { params }: Segments) {
 
   try {
+
+    const user = await getUserSession();
+
+    if (!user) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+
     const { id } = params;
     const todo = await prisma.todo.findFirst({ where: { id } });
 

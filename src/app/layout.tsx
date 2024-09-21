@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { UIProvider } from "@/context";
 
 import "./globals.css";
+import { AuthProvider } from "@/auth";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <UIProvider>{children}</UIProvider>
-      </body>
-    </html>
+    <AuthProvider>
+      <UIProvider>
+        <html lang="en">
+          <body className={inter.className}>{children}</body>
+        </html>
+      </UIProvider>
+    </AuthProvider>
   );
 }

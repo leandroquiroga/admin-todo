@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import * as yup from 'yup';
 import prisma from '@/lib/prisma';
+import { getUserSession } from "@/auth/components/actions/auth-actions";
 
 
 export async function GET(request: Request) {
@@ -37,6 +38,9 @@ const postSchema = yup.object({
 export async function POST(request: Request) {
 
   try {
+    const user = await getUserSession();
+
+    if (!user) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     // Validamos el body de la request contra el schema de yup
     const { description, done, ...rest } = await postSchema.validate(await request.json());
 
@@ -54,8 +58,9 @@ export async function POST(request: Request) {
     }
 
     const todo = await prisma.todo.create({
-      data: { description, done }
+      data: { description, done, userId: user.id }
     })
+
 
     return NextResponse.json({ message: "Has been created a new task", data: todo });
   } catch (error: any) {
@@ -71,8 +76,11 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    const user = await getUserSession();
+
+    if (!user) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     // Eliminanos los todos que esten complentados de las bases de datos
-    const response = await prisma.todo.deleteMany({ where: { done: true } });
+    const response = await prisma.todo.deleteMany({ where: { done: true, userId: user.id } });
 
     if (response.count === 0) return NextResponse.json({ message: "No completed tasks to delete" });
 
