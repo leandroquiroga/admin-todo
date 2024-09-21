@@ -1,4 +1,5 @@
 'use server';
+import { getUserSession } from "@/auth/components/actions/auth-actions";
 /**
  * El uso de los server actions nos permite realizar acciones del lado del servidor, si necesidad de crear endpoints. 
  * Si queremos utilizar un server action en una funcion podemos colocar el 'use server' dentro de la funcion, en cambio si la queremos utilizar para todo el 
@@ -38,7 +39,7 @@ export const toggleTodo = async (id: string, done: boolean): Promise<Todo> => {
   return updateTodo;
 }
 
-export const createTodo = async (description: string): Promise<ResponseCreateTodo> => {
+export const createTodo = async (description: string, userId: string): Promise<ResponseCreateTodo> => {
 
   try {
     const todo = await prisma.todo.create({ data: { description } })

@@ -2,11 +2,13 @@
 
 import React, { FormEvent, useEffect, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import { createTodo } from "../actions/actions";
+import { createTodo } from "../helpers/todos";
 import { Modal } from "./Modal";
 import { NewTodoProps } from "@/utils/features/todos/interfaces";
+import { useRouter } from "next/navigation";
 
 export const NewTodo = ({ todos }: NewTodoProps) => {
+  const router = useRouter();
   const [description, setDescription] = useState("");
   const [disabledButton, setDisabledButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -24,7 +26,10 @@ export const NewTodo = ({ todos }: NewTodoProps) => {
     // Validamos que la descripción no esté vacía
     if (description.trim().length === 0) return;
 
+    // await createTodo(description, userId);
     await createTodo(description);
+    router.refresh();
+
     //Limpiamos el campo de descripción
     setDescription("");
   };
